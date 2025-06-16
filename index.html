@@ -3,359 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
   <title>Appel à dons et prêts</title>
-
-  <style>
-    /* ===== CSS VARIABLES ===== */
-    :root {
-      /* Colors */
-      --color-bg: #f5f5f5;
-      --color-white: #fff;
-      --color-green: #006949;
-      --color-brown: #683400;
-      --color-purple: #4a2340;
-      --color-rose-light: #FFD7D6;
-      --color-rose: #FF9C99;
-      --color-rose-dark: #1F0101;
-      --color-shadow: rgba(0,0,0,0.08);
-
-      /* Typography */
-      --font-main: 'General Sans', Arial, sans-serif;
-      --font-size-base: 1.1rem;
-      --font-size-title: 2rem;
-      --font-size-title-mobile: 1.2rem;
-      --font-size-base-mobile: 1rem;
-
-      /* Layout */
-      --radius-main: 12px;
-      --radius-img: 8px;
-      --shadow-main: 0 4px 16px var(--color-shadow);
-      --section-max-width: 900px;
-      --section-padding: 32px 5vw;
-      --section-padding-mobile: 16px 2vw;
-      --section-gap: 32px;
-      --section-gap-mobile: 20px;
-      --img-max-width: 563px;
-
-      /* Print */
-      --print-width: 595.28px;
-      --print-height: 841.89px;
-      --print-margin: 32px;
-    }
-
-    /* ===== GLOBAL STYLES ===== */
-    body {
-      background: var(--color-bg);
-      margin: 0;
-      padding: 0;
-      font-family: var(--font-main);
-    }
-
-    /* ===== LAYOUT COMPONENTS ===== */
-    .content-section {
-      max-width: var(--section-max-width);
-      margin: 32px auto;
-      background: var(--color-white);
-      box-shadow: var(--shadow-main);
-      border-radius: var(--radius-main);
-      padding: var(--section-padding);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: var(--section-gap);
-    }
-
-    /* ===== SECTION ELEMENTS ===== */
-    .section-title {
-      text-align: center;
-      font-size: var(--font-size-title);
-      font-family: var(--font-main);
-      font-weight: 700;
-      text-transform: uppercase;
-      line-height: 1.3;
-      margin-bottom: 16px;
-    }
-
-    .section-sub-title {
-      font-family: var(--font-main);
-      font-size: var(--font-size-title);
-      font-weight: 500;
-      line-height: 1.1;
-      margin: 24px 0;
-      letter-spacing: 0;
-      text-align: left;
-    }
-
-    .section-text {
-      font-size: var(--font-size-base);
-      font-family: var(--font-main);
-      font-weight: 400;
-      line-height: 1.6;
-      margin-bottom: 8px;
-    }
-
-    .section-text strong {
-      font-weight: 500;
-    }
-
-    .section-img {
-      width: 100%;
-      max-width: var(--img-max-width);
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      border-radius: var(--radius-img);
-    }
-
-    /* ===== COLOR THEMES ===== */
-    .print-page.green .section-text,
-    .print-page.green .section-title,
-    .print-page.green .section-sub-title {
-      color: var(--color-green);
-    }
-
-    .print-page.purple .section-text,
-    .print-page.purple .section-title,
-    .print-page.purple .section-sub-title {
-      color: var(--color-purple);
-    }
-
-    .print-page.brown .section-text,
-    .print-page.brown .section-title,
-    .print-page.brown .section-sub-title {
-      color: var(--color-brown);
-    }
-
-    .print-page.rose-dark .section-text,
-    .print-page.rose-dark .section-title,
-    .print-page.rose-dark .section-sub-title {
-      color: var(--color-rose-dark);
-    }
-
-    /* ===== UI COMPONENTS ===== */
-    .box-pink {
-      background: var(--color-rose-light);
-      border-radius: var(--radius-main);
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .box-red {
-      background: var(--color-rose);
-      border-radius: var(--radius-main);
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .print-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--color-white);
-      border: 2px solid var(--color-green);
-      color: var(--color-green);
-      padding: 10px 16px;
-      border-radius: 25px;
-      font-family: var(--font-main);
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      box-shadow: var(--shadow-main);
-      transition: all 0.2s ease;
-      z-index: 1000;
-    }
-
-    .print-button:hover {
-      background: var(--color-green);
-      color: var(--color-white);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px var(--color-shadow);
-    }
-
-    /* ===== TABLE STYLES ===== */
-    .finance-tables-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .finance-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      margin-bottom: 16px;
-      background: var(--color-rose);
-      border-radius: var(--radius-main);
-      overflow: hidden;
-      flex: 1 1 250px;
-      min-width: 250px;
-    }
-
-    .section-title-small {
-      font-size: 1.5rem;
-      margin-top: 32px;
-    }
-
-    .finance-table th {
-      background: var(--color-rose-light);
-      font-weight: 500;
-      padding: 12px 16px;
-      text-align: left;
-      font-size: var(--font-size-base);
-    }
-
-    .finance-table td {
-      padding: 8px 16px;
-      font-size: var(--font-size-base);
-    }
-
-    .finance-table .total-row th,
-    .finance-table .total-row td {
-      font-weight: 700;
-      background: var(--color-rose);
-    }
-
-    /* ===== RESPONSIVE DESIGN ===== */
-    @media (max-width: 600px) {
-      .content-section {
-        padding: var(--section-padding-mobile);
-        gap: var(--section-gap-mobile);
-      }
-
-      .section-title,
-      .section-sub-title {
-        font-size: var(--font-size-title-mobile);
-      }
-
-      .section-text {
-        font-size: var(--font-size-base-mobile);
-      }
-
-      .section-img {
-        max-width: 100%;
-      }
-
-      .finance-table th,
-      .finance-table td {
-        font-size: var(--font-size-base-mobile);
-        padding: 8px;
-      }
-
-      .print-button {
-        display: none;
-      }
-    }
-
-    /* ===== PRINT STYLES ===== */
-    @media print {
-      @page {
-        size: A4;
-        margin: 20mm;
-      }
-
-      body {
-        background: var(--color-white);
-        font-size: 12pt;
-        line-height: 1.4;
-      }
-
-      .content-section {
-        box-shadow: none;
-        margin: 0;
-        border-radius: 0;
-        padding: 0;
-        max-width: initial;
-        display: block;
-        gap: 0;
-      }
-
-      .print-page {
-        page-break-after: always;
-        page-break-inside: avoid;
-        background: var(--color-white);
-        margin: 0;
-        padding: 0;
-        box-shadow: none;
-        position: relative;
-        overflow: visible;
-        display: block;
-        width: 100%;
-        height: auto;
-        min-height: calc(100vh - 40mm);
-      }
-
-      .print-page:last-child {
-        page-break-after: auto;
-      }
-
-      .section-title {
-        font-size: 18pt;
-        margin-bottom: 15pt;
-        page-break-after: avoid;
-      }
-
-      .section-sub-title {
-        font-size: 16pt;
-        margin: 15pt 0 10pt 0;
-        page-break-after: avoid;
-      }
-
-      .section-text {
-        font-size: 11pt;
-        margin-bottom: 8pt;
-        page-break-inside: avoid;
-      }
-
-      .section-img {
-        max-width: 100%;
-        page-break-inside: avoid;
-        margin: 10pt auto;
-      }
-
-      .finance-tables-container {
-        page-break-inside: avoid;
-        margin-bottom: 10pt;
-      }
-
-      .finance-table {
-        page-break-inside: avoid;
-        font-size: 10pt;
-        margin-bottom: 10pt;
-      }
-
-      .finance-table th,
-      .finance-table td {
-        font-size: 10pt;
-        padding: 6pt 8pt;
-      }
-
-      .box-pink,
-      .box-red {
-        page-break-inside: avoid;
-        margin-bottom: 10pt;
-        padding: 10pt;
-      }
-
-      .section-title-small {
-        font-size: 14pt;
-        margin-top: 20pt;
-      }
-
-      .print-button {
-        display: none;
-      }
-    }
-  </style>
 </head>
 <body>
+  <nav class="desktop-nav">
+    <a href="#intro">Le projet</a>
+    <a href="#financement">Financement</a>
+    <a href="#prets">Prêter</a>
+    <a href="#dons">Donner</a>
+    <a href="#contact">Contact</a>
+  </nav>
   <div class="content-section">
     <!-- Section 1 -->
-    <div class="print-page green">
+    <div class="print-page green" id="intro">
       <div class="section-title">Création d'un lieu <br/>collectif et solidaire</div>
       <img class="section-img" src="./maison.png" alt="Illustration" />
     </div>
+
     <!-- Section 2 -->
     <div class="print-page purple">
       <div class="section-title">Qui sommes-nous&nbsp;?</div>
@@ -368,6 +34,7 @@
       <div class="section-text">Nous sommes dix adultes et deux enfants qui habiteront un lieu en partageant des espaces (jardin, buanderie, chambre d'ami·e…), nous projetons une cohabitation en mode "coloc" avec des chambres individuelles et des espaces communs.</div>
       <div class="section-text">Nous avons à cœur d'habiter une maison dans le 8ième arrondissement de Lyon. Notre projet est d'acheter collectivement ce lieu afin d'y habiter, mais aussi de créer un <strong>espace ouvert, vivant et accueillant pour le quartier</strong>.</div>
     </div>
+
     <!-- Section 3 -->
     <div class="print-page brown">
       <div class="section-title">Un projet ouvert sur le quartier</div>
@@ -377,8 +44,9 @@
       <div class="section-text">Nous prévoyons également de créer <strong>un dortoir</strong> au 2e étage pour l'accueil temporaire de personnes ou de collectifs comme le nôtre.</div>
       <div class="section-text">Avec ce lieu, nous souhaitons en effet pouvoir <strong>répondre aux besoins d'autres collectifs</strong> et pouvoir accueillir des réunions autant que des ateliers (bricolage, peinture, auto-édition...) et des évènements artistiques ou festifs (concerts, théâtre, projections, expositions...).</div>
     </div>
+
     <!-- Section 4 -->
-    <div class="print-page rose-dark">
+    <div class="print-page rose-dark" id="financement">
       <div class="section-title">Un montage financier sans prêt bancaire</div>
       <div class="section-text">Suivant l'adage "Mieux vaut avoir 1000 ami·es à la rescousse qu'une banque à ses trousses", nous avons choisi d'acheter le bien <strong>uniquement à l'aide de dons et prêts individuels ou contractés auprès d'organisations qui partagent nos valeurs.</strong> Les prêts seront remboursés selon des conditions définies avec chacun·e des créancier·es.</div>
       <div class="section-text">En habitant le lieu, nous verserons <strong>des loyers à l'association propriétaire</strong>, qui serviront à rembourser les prêts. Ces loyers nous permettront de rembourser l'équivalent de 4500€ chaque mois.</div>
@@ -409,14 +77,23 @@
       <div class="box-pink">
         <div class="section-text">Nous avons déjà réuni <strong>477 800 €</strong> grâce aux apports de membres et aux prêts à particuliers.<br>Pour finaliser l'achat, il nous manque <strong>128 200€</strong>, à réunir d'ici <strong>novembre</strong>.<br>C'est pourquoi nous lançons un <strong>appel à dons et à prêts privés.</strong></div>
       </div>
+      <div class="box-pink section-text">
+        <strong>Calendrier du projet :</strong><br>
+        D'ici novembre 2025 : Finalisation des prêts et dons<br>
+        Automne 2025 : Achat du bien<br>
+        Début 2026 : Premiers travaux et mise en place du lieu<br>
+        Courant 2026 : Emmenagement des membres<br>
+        Début 2027 : Remboursement progressif des prêts<br>
+      </div>
     </div>
+
     <!-- Section 5 -->
-    <div class="print-page rose-dark">
+    <div class="print-page rose-dark" id="prets">
       <div class="section-title">Vous voulez prêter à Bazarrière?</div>
       <div class="box-pink">
         <div class="section-text">L'association propriétaire, Les Recoins, vous fournira une <strong>reconnaissance de dette</strong>, un document précisant le montant du prêt, sa durée et les modalités de remboursement, selon ce qui aura été convenu ensemble.<br>L'argent est rendu sans intérêts, et la première année, le temps de prendre nos marques et de faire des travaux, est une année de répit sans remboursement.<br>Ce doit donc être une somme qui n'impacte pas votre quotidien.</div>
       </div>
-      <div class="section-title section-title-small">Vous voulez faire un don à Bazarrière?</div>
+      <div class="section-title section-title-small" id="dons">Vous voulez faire un don à Bazarrière?</div>
       <div class="box-red">
         <div class="section-text"><strong>Si c'est une petite somme?</strong><br>Vous pouvez nous faire un <strong>apport sans droit de reprise</strong>.<br>Les associations peuvent recevoir de petites sommes non fiscalisées en échange de compensations non-monétaires.</div>
       </div>
@@ -426,8 +103,24 @@
       <div class="section-text">Pour discuter de l'une ou l'autre de ces possibilités, ou simplement en savoir plus sur notre projet, vous pouvez vous adresser directement à la personne qui vous a transmis ce document ou nous écrire à l'adresse <a href="mailto:lesrecoins@disroot.org">lesrecoins@disroot.org</a>.</div>
       <div class="section-text"><strong>Vous pouvez aussi nous soutenir en diffusant ce document autour de vous!</strong></div>
     </div>
+
   </div>
 
-  <button class="print-button" onclick="window.print()">📄 Imprimer</button>
+  <div class="content-section" id="contact">
+    <div class="section-title">Contact & Soutien</div>
+    <div class="section-text">
+      Pour discuter d’un prêt ou d’un don, utilisez les boutons ci-dessous ou écrivez-nous à <a href="mailto:lesrecoins@disroot.org">lesrecoins@disroot.org</a>.
+    </div>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+      <a href="mailto:lesrecoins@disroot.org?subject=Je veux prêter à Bazarrière" class="print-button" style="position:initial;">Je veux prêter</a>
+      <a href="mailto:lesrecoins@disroot.org?subject=Je veux faire un don à Bazarrière" class="print-button" style="position:initial;">Je veux donner</a>
+    </div>
+  </div>
+
+  <button class="print-button" onclick="window.print()">Imprimer le PDF</button>
 </body>
+<style>
+
+
+</style>
 </html>
