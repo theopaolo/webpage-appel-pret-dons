@@ -42,8 +42,14 @@
   p {
     text-wrap: pretty;
   }
+
   h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
+  }
+
+  h4 {
+    margin-bottom: .5rem;
+    padding-top: 0rem;
   }
 
   /*
